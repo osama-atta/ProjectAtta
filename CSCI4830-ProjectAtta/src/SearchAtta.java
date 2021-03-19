@@ -27,7 +27,7 @@ public class SearchAtta extends HttpServlet {
    void search(String keyword, HttpServletResponse response) throws IOException {
       response.setContentType("text/html");
       PrintWriter out = response.getWriter();
-      String title = "Database Result";
+      String title = "Registration Verification";
       String docType = "<!doctype html public \"-//w3c//dtd html 4.0 " + //
             "transitional//en\">\n"; //
       out.println(docType + //
@@ -43,32 +43,35 @@ public class SearchAtta extends HttpServlet {
          connection = DBConnectionAtta.connection;
 
          if (keyword.isEmpty()) {
-            String selectSQL = "SELECT * FROM MyTableAtta0128";
+            String selectSQL = "SELECT * FROM Project";
             preparedStatement = connection.prepareStatement(selectSQL);
          } else {
-            String selectSQL = "SELECT * FROM MyTableAtta0128 WHERE EMAIL LIKE ?";
-            String theEmail = "%" + keyword + "%";
+            String selectSQL = "SELECT * FROM Project WHERE PHONE LIKE ?";
+            String theEmail = "%" + keyword;
             preparedStatement = connection.prepareStatement(selectSQL);
             preparedStatement.setString(1, theEmail);
          }
          ResultSet rs = preparedStatement.executeQuery();
 
          while (rs.next()) {
-            int id = rs.getInt("id");
-            String userName = rs.getString("myuser").trim();
+            String firstName = rs.getString("firstName").trim();
+            String lastName = rs.getString("lastName").trim();
             String email = rs.getString("email").trim();
             String phone = rs.getString("phone").trim();
-            String address = rs.getString("address").trim();
 
-            if (keyword.isEmpty() || email.contains(keyword)) {
-               out.println("ID: " + id + ", ");
-               out.println("User: " + userName + ", ");
-               out.println("Email: " + email + ", ");
+            if (phone.contains(keyword)) {
+               out.println("Full Name: " + firstName + " " + lastName + ", ");
                out.println("Phone: " + phone + ", ");
-               out.println("Address: " + address + "<br>");
+               out.println("Email: " + email + "<br>");
+               out.println("<br>You are on the list!<br>");
+            }
+            
+            else {
+            	out.println("No record of patient");
             }
          }
-         out.println("<a href=/webproject-ex-0128-atta/search_atta.html>Search Data</a> <br>");
+         out.println("<a href=/CSCI4830-ProjectAtta/search_atta.html>Registration Verification</a> <br>");
+         out.println("<a href=/CSCI4830-ProjectAtta/insert_atta.html>Sign-up Sheet</a> <br>");
          out.println("</body></html>");
          rs.close();
          preparedStatement.close();

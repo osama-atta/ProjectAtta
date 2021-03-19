@@ -30,7 +30,7 @@ public class InsertAtta extends HttpServlet {
       String selection = request.getParameter("selection");
 
       Connection connection = null;
-      String insertSql = " INSERT IGNORE INTO Project (id, FIRSTNAME, LASTNAME, EMAIL, PHONE, BDATE, SELECTION) values (default, ?, ?, ?, ?, ?, ?)";
+      String insertSql = " INSERT INTO Project (id, FIRSTNAME, LASTNAME, EMAIL, PHONE, BDATE, SELECTION) values (default, ?, ?, ?, ?, ?, ?)";
 
       try {
          DBConnectionAtta.getDBConnection();
@@ -44,26 +44,47 @@ public class InsertAtta extends HttpServlet {
          preparedStmt.setString(6, selection);
          preparedStmt.execute();
          connection.close();
+         
+         response.setContentType("text/html");
+         PrintWriter out = response.getWriter();
+         String title = "Thank You for signing up!";
+         String docType = "<!doctype html public \"-//w3c//dtd html 4.0 " + "transitional//en\">\n";
+         out.println(docType + //
+               "<html>\n" + //
+               "<head><title>" + title + "</title></head>\n" +
+               "<body bgcolor=\"#ffffff\">\n" +
+               "<h2 align=\"center\">" + title + "</h2>\n" +
+               "<ul>\n" + 
+               "  <li>Full Name: " + firstName + " " + lastName + "\n" + "  <li>Email: " + email + "\n" +
+               "  <li>Phone: " + phone + "\n" + "  <li>Date of Birth: " + bdate + "\n" + "</ul>\n");
+
+         out.println("<a href=/CSCI4830-ProjectAtta/search_atta.html>Verify Registration</a> <br>");
+         out.println("<a href=/CSCI4830-ProjectAtta/insert_atta.html>Sign-up Sheet</a> <br>");
+         out.println("</body></html>");
+         
       } catch (Exception e) {
+    	  
          e.printStackTrace();
+         response.setContentType("text/html");
+         PrintWriter out = response.getWriter();
+         String title = "Duplicate or Invalid Entry!";
+         String docType = "<!doctype html public \"-//w3c//dtd html 4.0 " + "transitional//en\">\n";
+         out.println(docType + //
+               "<html>\n" + //
+               "<head><title>" + title + "</title></head>\n" +
+               "<body bgcolor=\"#ffffff\">\n" +
+               "<h2 align=\"center\">" + title + "</h2>\n" +
+               "<ul>\n" + 
+               "Phone Number and Email must be Unique for Each User<br><br>");
+
+         out.println("<a href=/CSCI4830-ProjectAtta/search_atta.html>Registration Verification</a> <br>");
+         out.println("<a href=/CSCI4830-ProjectAtta/insert_atta.html>Sign-up Sheet</a> <br>");
+         out.println("</body></html>");
+         
       }
 
       // Set response content type
-      response.setContentType("text/html");
-      PrintWriter out = response.getWriter();
-      String title = "Thank You for signing up!";
-      String docType = "<!doctype html public \"-//w3c//dtd html 4.0 " + "transitional//en\">\n";
-      out.println(docType + //
-            "<html>\n" + //
-            "<head><title>" + title + "</title></head>\n" +
-            "<body bgcolor=\"#ffffff\">\n" +
-            "<h2 align=\"center\">" + title + "</h2>\n" +
-            "<ul>\n" + 
-            "  <li>Full Name: " + firstName + " " + lastName + "\n" + "  <li>Email: " + email + "\n" +
-            "  <li>Phone: " + phone + "\n" + "  <li>Date of Birth: " + bdate + "\n" + "</ul>\n");
-
-      out.println("<a href=/webproject-ex-0128-atta/search_atta.html>Search Data</a> <br>");
-      out.println("</body></html>");
+      
    }
 
    protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
