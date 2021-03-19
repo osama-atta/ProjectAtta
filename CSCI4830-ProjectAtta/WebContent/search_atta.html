@@ -1,58 +1,82 @@
 <html>
-<head>
-<style>
+	<head>
+		<style>
 header {
-    background-color:black;
-    color:white;
+    background-color:white;
+    color:teal;
     text-align:center;
-    padding:5px;	 
+    padding:0px;	 
 }
 nav {
-    line-height:30px;
-    background-color:#eeeeee;
-    height:300px;
-    width:100px;
-    float:left;
+     line-height:75px;
+    background-color:white;
+    height:400px;
+    width:75px;
+    float:right;
     padding:5px;	      
 }
 section {
-    width:350px;
+   width:550px;
     float:left;
     padding:10px;	 	 
 }
 footer {
-    background-color:black;
-    color:white;
+    background-color:white;
+    color:black;
     clear:both;
-    text-align:center;
+    text-align:right;
     padding:5px;	 	 
 }
-</style>
-</head>
 
-<body>
-<header>
-<h1> Search Data </h1>
-</header>
+input[type=text] 
+    {
+        width: 35%;
+        padding: 12px 5px;
+        margin: 5px 0;
+        box-sizing: border-box;
+        border: 2px solid #ccc;
+        -webkit-transition: 0.5s;
+        transition: 0.5s;
+        outline: none;
+    }
 
-<nav>
-<a href="/webproject-ex-0128-atta/insert_atta.html">Insert Data</a> <br>
-</nav>
+input[type=text]:focus 
+	{
+		border: 3px solid #555;
+	}
+    
+input[type=submit]
+{
+  background-color: grey;
+  border: none;
+  color: white;
+  padding: 16px 32px;
+  text-decoration: none;
+  margin: 4px 2px;
+  cursor: pointer;
+}
 
-<section>
-	<h1>User Input</h1>
-	
-	<form action="SearchAtta" method="POST">
-	
-		Email: <input type="text" name="keyword"> <br />
-		
-		<input type="submit" value="Search" />
-	</form>
-
-</section>
-
-<footer>
-Copyright
-</footer>
-</body>
+		</style>
+	</head>
+	<body>
+		<header>
+			<h1> Search Entries </h1>
+		</header>
+		<nav>
+			<a href="/webproject-ex-0128-atta/insert_atta.html">Sign Up</a>
+			<br>
+		</nav>
+		<section>
+			<h1>Search Using a Phone Number</h1>
+			<form action="SearchAtta" method="POST">
+				Phone Number: <input type="text" name="keyword">
+				<br>
+				<br />
+				<input type="submit" value="Search" />
+			</form>
+		</section>
+		<footer>
+			Copyright
+		</footer>
+	</body>
 </html>

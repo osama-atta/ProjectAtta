@@ -22,22 +22,26 @@ public class InsertAtta extends HttpServlet {
    }
 
    protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-      String userName = request.getParameter("userName");
+      String firstName = request.getParameter("firstName");
+      String lastName = request.getParameter("lastName");
       String email = request.getParameter("email");
       String phone = request.getParameter("phone");
-      String address = request.getParameter("address");
+      String bdate = request.getParameter("bdate");
+      String selection = request.getParameter("selection");
 
       Connection connection = null;
-      String insertSql = " INSERT INTO MyTableAtta0128 (id, MYUSER, EMAIL, PHONE, ADDRESS) values (default, ?, ?, ?, ?)";
+      String insertSql = " INSERT IGNORE INTO Project (id, FIRSTNAME, LASTNAME, EMAIL, PHONE, BDATE, SELECTION) values (default, ?, ?, ?, ?, ?, ?)";
 
       try {
          DBConnectionAtta.getDBConnection();
          connection = DBConnectionAtta.connection;
          PreparedStatement preparedStmt = connection.prepareStatement(insertSql);
-         preparedStmt.setString(1, userName);
-         preparedStmt.setString(2, email);
-         preparedStmt.setString(3, phone);
-         preparedStmt.setString(4, address);
+         preparedStmt.setString(1, firstName);
+         preparedStmt.setString(2, lastName);
+         preparedStmt.setString(3, email);
+         preparedStmt.setString(4, phone);
+         preparedStmt.setString(5, bdate);
+         preparedStmt.setString(6, selection);
          preparedStmt.execute();
          connection.close();
       } catch (Exception e) {
@@ -47,20 +51,16 @@ public class InsertAtta extends HttpServlet {
       // Set response content type
       response.setContentType("text/html");
       PrintWriter out = response.getWriter();
-      String title = "Insert Data to DB table";
+      String title = "Thank You for signing up!";
       String docType = "<!doctype html public \"-//w3c//dtd html 4.0 " + "transitional//en\">\n";
       out.println(docType + //
             "<html>\n" + //
-            "<head><title>" + title + "</title></head>\n" + //
-            "<body bgcolor=\"#f0f0f0\">\n" + //
-            "<h2 align=\"center\">" + title + "</h2>\n" + //
-            "<ul>\n" + //
-
-            "  <li><b>User Name</b>: " + userName + "\n" + //
-            "  <li><b>Email</b>: " + email + "\n" + //
-            "  <li><b>Phone</b>: " + phone + "\n" + //
-            "  <li><b>Address</b>: " + address + "\n" + //
-            "</ul>\n");
+            "<head><title>" + title + "</title></head>\n" +
+            "<body bgcolor=\"#ffffff\">\n" +
+            "<h2 align=\"center\">" + title + "</h2>\n" +
+            "<ul>\n" + 
+            "  <li>Full Name: " + firstName + " " + lastName + "\n" + "  <li>Email: " + email + "\n" +
+            "  <li>Phone: " + phone + "\n" + "  <li>Date of Birth: " + bdate + "\n" + "</ul>\n");
 
       out.println("<a href=/webproject-ex-0128-atta/search_atta.html>Search Data</a> <br>");
       out.println("</body></html>");

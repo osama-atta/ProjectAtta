@@ -4,7 +4,7 @@
 header 
 {
     background-color:White;
-    color:teal;
+    color:black;
     text-align:center;
     padding:0px;	 
 }
@@ -46,12 +46,13 @@ input[type=text]
     }
     
 input[type=text]:focus 
-    {
-        border: 3px solid #555;
-    }
+	{
+		border: 3px solid #555;
+	}
     
- input[type=submit]{
-  background-color: #4CAF50;
+input[type=submit]
+{
+  background-color: grey;
   border: none;
   color: white;
   padding: 16px 32px;
@@ -63,51 +64,50 @@ input[type=text]:focus
 
 </style>
 	</head>
-	<body>
-		<header>
+<body>
+	<header>
 			<h1> 2021 COVID-19 Vaccination Sign-up Sheet </h1>
-		</header>
-		<nav>
-			<a href="/workspace4830-project/search_atta.html">Search</a>
+	</header>
+	<nav>
+		<a href="/workspace4830-project/search_atta.html">Search</a>
+		<br>
+	</nav>
+	<section>
+		<h1>Patient Information</h1>
+		<form action="InsertAtta" method="POST">
+			Full Name: 
 			<br>
-			</nav>
-			<section>
-				<h1>Patient Information</h1>
-				<form action="InsertAtta" method="POST">
-Full Name:
-
-					
-					<br>
-						<input type="text" name="First Name" placeholder="First Name">
-							<input type="text" name="Last Name" placeholder="Last Name">
-								<br>
-									<br>
-										<div class="item">
-											<label for="bdate">Date of Birth:</label>
-											<input id="bdate" type="date" name="bdate" required/>
-											<i class="fas fa-calendar-alt"></i>
-										</div>
-										<br>
-Email: 
-											
-											<input type="text" name="email" placeholder="myname@example.com">
-												<br>
-													<br>
-Phone: 
-														
-														<input type="text" name="phone" placeholder="### ### ####">
-															<br>
-																<br>
-Have you recieved polymerase chain reaction (PCR) test in the past 2 weeks?
-
-																	
-																	<br>
-																		<br>
-																			<input type="submit" value="Submit" />
-																		</form>
-																	</section>
-																	<footer>
-Copyright
-</footer>
-																</body>
-															</html>
+			<input type="text" name="firstName" placeholder="First Name" required/>
+			<input type="text" name="lastName" placeholder="Last Name" required/>
+			<br>
+			<br>
+			<div class="item">
+			<label for="bdate">Date of Birth:</label>
+			<input id="bdate" type="date" name="bdate" required/>
+			<i class="fas fa-calendar-alt"></i>
+			</div>
+			<br>
+			Email:	<input type="text" name="email" placeholder="myname@example.com" required/>
+			<br>
+			<br>
+			Phone: <input type="text" name="phone" placeholder="### ### ####" required/>
+			<br>
+			<br>
+			Have you received polymerase chain reaction (PCR) test in the past 2 weeks?
+			<br>
+			Select one:
+			<select id="selection" name="selection">
+				<option value="Negative">Yes, I tested negative</option>
+				<option value="Positive">Yes, I tested positive</option>
+				<option value="No">No</option>
+			</select>
+			<br>
+			<br>
+			<input type="submit" value="Submit" />
+		</form>
+	</section>
+	<footer>
+		Copyright
+	</footer>
+</body>
+</html>
