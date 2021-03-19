@@ -33,7 +33,7 @@ public class SearchAtta extends HttpServlet {
       out.println(docType + //
             "<html>\n" + //
             "<head><title>" + title + "</title></head>\n" + //
-            "<body bgcolor=\"#f0f0f0\">\n" + //
+            "<body bgcolor=\"#ffffff\">\n" + //
             "<h1 align=\"center\">" + title + "</h1>\n");
 
       Connection connection = null;
@@ -42,17 +42,14 @@ public class SearchAtta extends HttpServlet {
          DBConnectionAtta.getDBConnection();
          connection = DBConnectionAtta.connection;
 
-         if (keyword.isEmpty()) {
-            String selectSQL = "SELECT * FROM Project";
-            preparedStatement = connection.prepareStatement(selectSQL);
-         } else {
             String selectSQL = "SELECT * FROM Project WHERE PHONE LIKE ?";
             String theEmail = "%" + keyword;
             preparedStatement = connection.prepareStatement(selectSQL);
             preparedStatement.setString(1, theEmail);
-         }
+            boolean resultFound = true;
          ResultSet rs = preparedStatement.executeQuery();
 
+         
          while (rs.next()) {
             String firstName = rs.getString("firstName").trim();
             String lastName = rs.getString("lastName").trim();
@@ -63,13 +60,18 @@ public class SearchAtta extends HttpServlet {
                out.println("Full Name: " + firstName + " " + lastName + ", ");
                out.println("Phone: " + phone + ", ");
                out.println("Email: " + email + "<br>");
-               out.println("<br>You are on the list!<br>");
+               out.println("<br>You are on the list!<br><br>");
+               resultFound = false;
             }
-            
-            else {
-            	out.println("No record of patient");
-            }
+
          }
+         
+         
+         if(resultFound)
+         {
+        	 out.println("No record of patient<br><br>"); 
+         }
+         
          out.println("<a href=/CSCI4830-ProjectAtta/search_atta.html>Registration Verification</a> <br>");
          out.println("<a href=/CSCI4830-ProjectAtta/insert_atta.html>Sign-up Sheet</a> <br>");
          out.println("</body></html>");
