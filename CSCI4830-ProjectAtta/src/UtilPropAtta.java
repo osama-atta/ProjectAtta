@@ -10,7 +10,7 @@ public class UtilPropAtta {
    static String _PROP_FILENAME_WIN_LOCAL = "E:\\CSCI-4830\\Repository\\CSCI4830-ProjectAtta\\CSCI4830-ProjectAtta\\WebContent\\config.properties";
    static String _PROP_FILENAME_OSX_LOCAL = "/YOUR_PATH/webproject/WebContent/config.properties";
    // * Remote server path
-   static String _PROP_FILENAME_REMOTE = "/var/lib/tomcat7/webapps/webproject-ex-0128-atta/config.properties";
+   static String _PROP_FILENAME_REMOTE = "/var/lib/tomcat7/webapps/CSCI4830-ProjectAtta/config.properties";
    static Properties prop = new Properties();
 
    public static void loadProperty() throws Exception {
